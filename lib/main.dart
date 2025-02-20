@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/detail/bookmark_list_provider.dart';
+import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
 import 'package:restaurant_app/provider/main/index_nav_provider.dart';
 import 'package:restaurant_app/screen/detail/detail_screen.dart';
 import 'package:restaurant_app/screen/main/main_screen.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
 import 'package:restaurant_app/style/theme/restaurant_theme.dart';
+import 'package:restaurant_app/data/api/api_services.dart';
 
 void main() {
   runApp(
@@ -17,11 +19,15 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => BookmarkListProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => RestaurantDetailProvider(apiService: ApiServices()),
+        ),
       ],
       child: const MyApp(),
     ),
   );
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -30,7 +36,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Restaurant App',
-      theme: RestaurantTheme.lightTheme,
+      theme: RestaurantTheme.darkTheme,
       darkTheme: RestaurantTheme.darkTheme,
       themeMode: ThemeMode.system,
       initialRoute: NavigationRoute.mainRoute.name,
